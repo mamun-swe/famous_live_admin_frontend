@@ -1,13 +1,314 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: nunito-regular;
+  src: url('./assets/fonts/Nunito-Regular.ttf');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: nunito-bold;
+  src: url('./assets/fonts/Nunito-Bold.ttf');
+}
+
+@font-face {
+  font-family: roboto-bold;
+  src: url('./assets/fonts/Roboto-Bold.ttf');
+}
+
+.color-unique {
+  color: rgb(159, 47, 123);
+}
+
+.App {
+  background: #e0e0e0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+main {
+  margin-top: 90px;
+}
+
+.col-12 {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.pro-sidebar {
+  position: fixed !important;
+  height: 100vh !important;
+}
+
+.sidebar .top-nav .img-box {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.sidebar .top-nav .img-box img {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.sidebar .top-nav .dropdown-menu {
+  font-size: 14px;
+  font-family: nunito-regular;
+}
+
+.sidebar .top-nav .dropdown-toggle:after {
+  content: none!important
+}
+
+.sidebar .top-nav p {
+  font-size: 14px;
+  font-family: nunito-regular;
+}
+
+@media(max-width: 992px) {
+  .sidebar .top-nav {
+    position: fixed;
+    top: 0;
+    padding: 10px;
+    width: 100%;
+    z-index: 8;
+  }
+}
+
+@media(min-width: 992px) {
+  .sidebar .top-nav {
+    position: fixed;
+    top: 0;
+    padding: 10px;
+    width: 100%;
+    padding-left: 280px;
+    z-index: 8;
+  }
+  main {
+    padding-left: 270px;
+  }
+}
+
+/* Auth */
+
+.auth {
+  width: 100%;
+  height: 100vh;
+}
+
+.auth {
+  width: 100%;
+  height: 100vh;
+}
+
+.auth .card {
+  border-radius: 8px;
+}
+
+.auth .card .card-header {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.auth .card .card-header h4 {
+  font-weight: 900;
+  font-family: roboto-bold;
+  color: rgb(159, 47, 123);
+}
+
+.auth .card .card-body {
+  color: #000;
+  font-weight: 400;
+  padding-top: 40px;
+  padding-bottom: 50px;
+}
+
+.auth .card .card-body .form-control {
+  color: #000;
+  font-family: nunito-regular;
+}
+
+.auth .card .card-body .form-control:focus {
+  border: 1px solid rgb(159, 47, 123);
+}
+
+.auth .card .card-body a {
+  font-size: 15px;
+  font-family: nunito-regular;
+  color: rgb(159, 47, 123);
+}
+
+.auth .card .card-body .btn {
+  border: 0;
+  background: rgb(159, 47, 123);
+}
+
+@media(max-width: 576px) {
+  .auth .card {
+    width: 90vw;
+  }
+}
+
+@media(min-width: 576px) {
+  .auth .card {
+    width: 460px;
+  }
+}
+
+/* Dashboard */
+
+.dashboard a:hover {
+  text-decoration: none;
+}
+
+.dashboard .card {
+  height: 130px;
+  margin-bottom: 30px;
+}
+
+.dashboard .card h4 {
+  margin-bottom: 5px;
+  font-family: roboto-bold;
+}
+
+.dashboard .card p {
+  margin-bottom: 0;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-family: roboto-bold;
+}
+
+/* Users */
+
+.users-index .img-box {
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+}
+
+.users-index .img-box img {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.users-index p {
+  font-size: 14px;
+  margin-top: 5px;
+  font-family: nunito-regular;
+}
+
+.users-index .btn {
+  font-size: 13px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: nunito-regular;
+}
+
+.users-index .follow-btn {
+  color: rgb(159, 47, 123);
+}
+
+.users-index .follow-btn:hover {
+  color: rgb(159, 47, 123);
+}
+
+/* User Profile */
+
+.user-profile .profile-picture-box {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.user-profile .profile-picture-box img {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.user-profile .user-info ul {
+  padding-left: 0;
+}
+
+.user-profile .user-info ul li {
+  list-style: none;
+}
+
+.user-profile .user-info ul li p {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-family: nunito-regular;
+}
+
+.user-profile .btn {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-family: nunito-bold;
+  border: 0;
+  background: rgb(159, 47, 123);
+  background: linear-gradient(127deg, rgba(159, 47, 123, 1) 39%, rgba(135, 27, 82, 1) 95%);
+}
+
+.modal-dialog .form-control {
+  font-size: 14px;
+  font-family: nunito-regular;
+}
+
+.modal-dialog .submit-btn {
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: nunito-bold;
+  border: 0;
+  background: rgb(159, 47, 123);
+  background: linear-gradient(127deg, rgba(159, 47, 123, 1) 39%, rgba(135, 27, 82, 1) 95%);
+}
+
+@media(max-width: 992px) {
+  .user-profile .profile-picture-box {
+    margin: auto;
+  }
+  .user-profile .user-info .btn {
+    float: right;
+  }
+}
+
+.flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+.flex-column {
+  -ms-flex-direction: column !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+  flex-direction: column !important;
+}
+
+/* Loader */
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.027);
+  transition: 0.5s;
+}
+
+.loader .card {
+  width: 250px;
+  height: 80px;
+}
+
+.spin {
+  color: rgb(159, 47, 123);
+  animation: spin 1.5s linear infinite;
 }
