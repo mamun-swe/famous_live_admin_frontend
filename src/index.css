@@ -270,6 +270,31 @@ main {
   }
 }
 
+/* Name Update Request */
+
+.update-request .table thead tr td {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.update-request .table tbody tr td {
+  font-size: 14px;
+  font-family: nunito-regular;
+}
+
+.update-request .table tbody tr td .btn {
+  font-size: 13px;
+  text-transform: capitalize;
+  font-family: roboto-bold;
+  border: 0;
+  background: rgb(159, 47, 123);
+  background: linear-gradient(127deg, rgba(159, 47, 123, 1) 39%, rgba(135, 27, 82, 1) 95%);
+}
+
+.update-request .table tbody tr td .cancel-btn {
+  background: rgb(189, 59, 73);
+}
+
 .flex-center {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -6,6 +6,7 @@ import Dashboard from './Dashboard/Dashboard';
 import UserIndex from './Users/Index';
 import UserProfile from './Users/Profile';
 import MyProfile from './Users/MyProfile';
+import UpdateRequests from './Requests/Index';
 
 
 const Master = () => {
@@ -23,6 +24,7 @@ const Master = () => {
                             <Route exact path="/dashboard/users" component={UserIndex} />
                             <Route exact path="/dashboard/user/:id" component={UserProfile} />
                             <Route exact path="/dashboard/me" component={MyProfile} />
+                            <Route exact path="/dashboard/requests" component={UpdateRequests} />
                         </Switch>
                     </main>
                 </div>

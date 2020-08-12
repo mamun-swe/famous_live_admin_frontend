@@ -16,11 +16,11 @@ const Dashboard = () => {
                     </div>
 
                     <div className="col-6 col-md-4">
-                        <Link to='/dashboard/'>
+                        <Link to='/dashboard/requests'>
                             <div className="card border-0 shadow p-2">
                                 <div className="flex-center flex-column text-center">
                                     <h4 className="color-unique">1200</h4>
-                                    <p className="text-dark">requests</p>
+                                    <p className="text-dark">update requests</p>
                                 </div>
                             </div>
                         </Link>

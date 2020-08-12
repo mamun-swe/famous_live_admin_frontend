@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import api from '../../api';
+// import axios from 'axios';
+// import api from '../../api';
 
 const Login = (props) => {
     const { register, handleSubmit, errors } = useForm();
