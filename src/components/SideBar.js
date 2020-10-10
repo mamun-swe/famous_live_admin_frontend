@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Icon } from 'react-icons-kit';
 import { Link, useHistory } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { ic_menu, ic_announcement } from 'react-icons-kit/md';
-import { users, user, lock } from 'react-icons-kit/icomoon';
+import { users, lock } from 'react-icons-kit/icomoon';
 import { dashboard } from 'react-icons-kit/fa/dashboard';
 import axios from 'axios';
 import api from '../utils/api';
+import jwt from 'jwt-decode';
 
 import sidebarBg from '../assets/static/bg.jpg';
-import userImg from '../assets/static/user.jpg';
+import noImage from '../assets/static/noimage.png';
 
 
 const SideBar = () => {
     const history = useHistory()
     const [toggled, setToggled] = useState(false)
     const [image] = useState(true)
+    const [admin, setAdmin] = useState('')
+
+    useEffect(() => {
+        const decode = jwt(localStorage.getItem("token"))
+        setAdmin(decode.name)
+    }, [])
 
     const handleToggleSidebar = (value) => {
         setToggled(value);
@@ -84,18 +91,17 @@ const SideBar = () => {
                             </div>
                         </div>
                         <div className="ml-auto mt-1 pr-2">
-                            <p className="mb-0 text-capitalize">abdullah al mamun</p>
+                            <p className="mb-0 text-capitalize">{admin}</p>
                         </div>
                         <div>
                             <Dropdown>
                                 <Dropdown.Toggle variant="white" id="dropdown-basic" className="p-0 shadow-none">
                                     <div className="img-box rounded-circle">
-                                        <img src={userImg} className="img-fluid" alt="..." />
+                                        <img src={noImage} className="img-fluid" alt="..." />
                                     </div>
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu className="border-0 shadow">
-                                    <Dropdown.Item className="px-2" as={Link} to="/dashboard/me"><Icon size={15} icon={user} className="mr-1" />My Profile</Dropdown.Item>
                                     <Dropdown.Item className="px-2" onClick={logout}><Icon size={15} icon={lock} className="mr-1" />Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>

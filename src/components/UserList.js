@@ -5,9 +5,12 @@ import { ic_clear } from 'react-icons-kit/md';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import api from '../utils/api';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import noImage from '../assets/static/noimage.png';
 
+toast.configure({ autoClose: 2000 })
 const UserList = ({ users, updatestatus }) => {
     const { register, handleSubmit, errors } = useForm()
     const [show, setShow] = useState(false)
@@ -19,16 +22,33 @@ const UserList = ({ users, updatestatus }) => {
     const handleShow = (data) => {
         setModalData(data)
         setShow(true)
-        console.log(data)
+    }
+
+    // Header 
+    const header = {
+        headers:
+        {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
     }
 
     const onSubmit = async (data) => {
         const newData = {
-            id: modalData.id,
             coin_amount: parseInt(data.coin_amount)
         }
-        setLoading(true)
-        console.log(newData)
+
+        try {
+            setLoading(true)
+            const response = await axios.put(`${api}admin/user/${modalData.id}/give-coin`, newData, header)
+            if (response.data.status === true) {
+                handleClose()
+                toast.success(response.data.message)
+            }
+        } catch (error) {
+            if (error) {
+                console.log(error.response)
+            }
+        }
     }
 
     return (
