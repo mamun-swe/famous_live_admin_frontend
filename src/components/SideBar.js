@@ -4,10 +4,8 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import { Icon } from 'react-icons-kit';
 import { Link } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
-
-import { ic_menu } from 'react-icons-kit/md/ic_menu';
+import { ic_menu, ic_announcement } from 'react-icons-kit/md';
 import { users, user, lock } from 'react-icons-kit/icomoon';
-
 import { dashboard } from 'react-icons-kit/fa/dashboard';
 
 import sidebarBg from '../assets/static/bg.jpg';
@@ -45,14 +43,10 @@ const SideBar = () => {
                         Users
                         <Link to="/dashboard/users" />
                     </MenuItem>
-                    {/* <MenuItem active={true} icon={<Icon icon={grid} />}>Home</MenuItem>
-                    <SubMenu title="Components" icon={<Icon icon={grid} />}>
-                        <MenuItem>Component 1</MenuItem>
-                        <MenuItem>Component 2</MenuItem>
-                        <MenuItem>Component 2</MenuItem>
-                        <MenuItem>Component 2</MenuItem>
-                        <MenuItem>Component 2</MenuItem>
-                    </SubMenu> */}
+                    <MenuItem active={true} icon={<Icon icon={ic_announcement} />}>
+                        Name Update Requests
+                        <Link to="/dashboard/requests" />
+                    </MenuItem>
                 </Menu>
             </ProSidebar>
 

@@ -1,61 +1,114 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import api from '../../api';
+import api from '../../utils/api';
 import UserList from '../../components/UserList';
 import Pagination from '../../components/Pagination';
 import Loading from '../../components/Loading';
 
 
 const Index = () => {
-    const [isLoading, setLoading] = useState(false);
-    const [users, setUsers] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(20);
+    const [isLoading, setLoading] = useState(false)
+    const [users, setUsers] = useState([])
+    const [filteredUsers, setFilteredUsers] = useState(users)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [usersPerPage] = useState(20)
 
     useEffect(() => {
         fetchUsers()
     }, [])
 
+    // On change filter handeller
+    const statusFilter = event => {
+        let data = event.target.value
+        if (data === 'confirmed') {
+            const filtereData = users.filter(x => x.account_status === 'confirmed')
+            return setFilteredUsers(filtereData)
+        } else if (data === 'pending') {
+            const filtereData = users.filter(x => x.account_status === 'pending')
+            return setFilteredUsers(filtereData)
+        } else if (data === 'blocked') {
+            const filtereData = users.filter(x => x.account_status === 'blocked')
+            return setFilteredUsers(filtereData)
+        } else if (data === 'all') {
+            return setFilteredUsers(users)
+        }
+        const filtereData = users.filter(x => x.account_status > 10000)
+        return setFilteredUsers(filtereData)
+    }
+
+
     // fetch users
-    const fetchUsers = () => {
-        setLoading(true)
-        axios.get(`${api}posts`)
-            .then(res => {
-                setUsers(res.data)
+    const fetchUsers = async () => {
+        try {
+            setLoading(true)
+            const response = await axios.get(`${api}admin/users`)
+            setUsers(response.data.users)
+            setFilteredUsers(response.data.users)
+            setLoading(false)
+        } catch (error) {
+            if (error) console.log(error.message)
+        }
+    }
+
+    // Update Account Status
+    const changeStatus = async (data) => {
+        let newData = {
+            account_status: data.status
+        }
+
+        try {
+            setLoading(true)
+            const response = await axios.put(`${api}admin/user/${data.id}/update-status`, newData)
+            if (response.data.message === 'success') {
+                fetchUsers()
                 setLoading(false)
-            })
-            .catch(err => {
-                if (err) {
-                    console.log(err);
-                }
-            })
+            }
+        } catch (error) {
+            if (error) {
+                console.log(error.response)
+            }
+        }
     }
 
 
     // Get Current Users
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+    const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-
     return (
         <div className="users-index">
-
             {isLoading ? (
                 <Loading />
             ) :
                 <div className="container-fluid">
                     <div className="row">
+                        <div className="col-12 mb-2">
+                            <div className="card border-0">
+                                <div className="card-body py-2">
+                                    <select
+                                        style={{ width: 150, marginLeft: "auto" }}
+                                        className="form-control shadow-none"
+                                        onChange={statusFilter}
+                                    >
+                                        <option value="all">All</option>
+                                        <option value="confirmed">Confirmed</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="blocked">Blocked</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div className="col-12">
                             <div className="card border-0 py-3 mb-3">
 
-                                <UserList users={currentUsers} />
+                                <UserList users={currentUsers} updatestatus={changeStatus} />
 
                                 <div className="px-2 px-lg-3 pt-2 pt-lg-3">
-                                    <Pagination usersPerPage={usersPerPage} totalUsers={users.length} paginate={paginate} />
+                                    <Pagination usersPerPage={usersPerPage} totalUsers={filteredUsers.length} paginate={paginate} />
                                 </div>
 
                             </div>

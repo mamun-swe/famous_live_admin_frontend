@@ -179,98 +179,52 @@ main {
 
 /* Users */
 
-.users-index .img-box {
-  width: 25px;
-  height: 25px;
+.users-index .table .img-box {
+  width: 30px;
+  height: 30px;
   overflow: hidden;
 }
 
-.users-index .img-box img {
+.users-index .table .img-box img {
   min-width: 100%;
   min-height: 100%;
 }
 
-.users-index p {
+.users-index .table thead tr td {
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 900;
+  font-family: nunito-regular;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.users-index .table tbody tr td {
   font-size: 14px;
   margin-top: 5px;
   font-family: nunito-regular;
+  border-bottom: 1px solid #dfdfdf;
 }
 
-.users-index .btn {
+.users-index .table .btn {
+  color: #fff;
   font-size: 13px;
-  padding-left: 15px;
-  padding-right: 15px;
-  font-family: nunito-regular;
-}
-
-.users-index .follow-btn {
-  color: rgb(159, 47, 123);
-}
-
-.users-index .follow-btn:hover {
-  color: rgb(159, 47, 123);
-}
-
-/* User Profile */
-
-.user-profile .profile-picture-box {
-  width: 120px;
-  height: 120px;
-  overflow: hidden;
-}
-
-.user-profile .profile-picture-box img {
-  min-width: 100%;
-  min-height: 100%;
-}
-
-.user-profile .user-info ul {
-  padding-left: 0;
-}
-
-.user-profile .user-info ul li {
-  list-style: none;
-}
-
-.user-profile .user-info ul li p {
-  margin-bottom: 5px;
-  font-size: 15px;
-  font-family: nunito-regular;
-}
-
-.user-profile .btn {
-  font-size: 12px;
-  text-transform: uppercase;
-  font-family: nunito-bold;
-  border: 0;
-  background: rgb(159, 47, 123);
-  background: linear-gradient(127deg, rgba(159, 47, 123, 1) 39%, rgba(135, 27, 82, 1) 95%);
-}
-
-.modal-dialog .form-control {
-  font-size: 14px;
-  font-family: nunito-regular;
-}
-
-.modal-dialog .submit-btn {
-  font-size: 14px;
-  text-transform: uppercase;
-  font-family: nunito-bold;
-  border: 0;
-  background: rgb(159, 47, 123);
-  background: linear-gradient(127deg, rgba(159, 47, 123, 1) 39%, rgba(135, 27, 82, 1) 95%);
-}
-
-@media(max-width: 992px) {
-  .user-profile .profile-picture-box {
-    margin: auto;
-  }
-  .user-profile .user-info .btn {
-    float: right;
-  }
+  padding: 3px 12px;
+  text-transform: capitalize;
+  font-family: roboto-bold;
+  margin-right: 5px;
 }
 
 /* Name Update Request */
+
+.update-request img {
+  height: 180px;
+  margin: auto;
+}
+
+.update-request h4 {
+  margin-top: 20px;
+  font-family: roboto-bold;
+}
 
 .update-request .table thead tr td {
   font-size: 14px;

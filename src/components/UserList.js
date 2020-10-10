@@ -1,30 +1,68 @@
 import React from 'react';
-import profileImg from '../assets/static/user.jpg';
-import { Link } from 'react-router-dom';
+import noImage from '../assets/static/noimage.png';
 
+const UserList = ({ users, updatestatus }) => {
 
-const UserList = ({ users }) => {
     return (
-        <div>
-            {users.length > 0 && users.map((user, i) =>
-                <div className="d-flex p-2 px-lg-3 border-bottom" key={i}>
-                    <div className="img-box rounded-circle">
-                        <img src={profileImg} className="img-fluid" alt="..." />
-                    </div>
-                    <div className="pl-3 pr-2">
-                        <p className="mb-0">{user.title.slice(0, 10)}</p>
-                    </div>
-                    {/* <div className="ml-auto px-1">
-                        <button type="button" className="btn btn-sm btn-light shadow-none text-danger">Block</button>
-                    </div> */}
-                    <div className="ml-auto px-1">
-                        <button type="button" className="btn btn-sm btn-light shadow-none follow-btn">Follow</button>
-                    </div>
-                    <div className="px-1">
-                        <Link to={`/dashboard/user/${user.id}`} type="button" className="btn btn-sm btn-light shadow-none text-dark">Profile</Link>
-                    </div>
-                </div>
-            )}
+        <div className="p-2">
+            <table className="table table-sm table-responsive-sm table-borderless">
+                <thead>
+                    <tr>
+                        <td>SL</td>
+                        <td>Image</td>
+                        <td>Name</td>
+                        <td>Phone</td>
+                        <td>Status</td>
+                        <td className="text-center">Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.length > 0 && users.map((user, i) =>
+                        <tr key={i}>
+                            <td className="pt-2">{i + 1}</td>
+                            <td>
+                                <div className="img-box rounded-circle">
+                                    {user.image ?
+                                        <img src={user.image} className="img-fluid" alt={user.name} />
+                                        :
+                                        <img src={noImage} className="img-fluid" alt="..." />
+                                    }
+                                </div>
+                            </td>
+                            <td className="pt-2">{user.name}</td>
+                            <td className="pt-2">{user.phone}</td>
+                            <td className="text-capitalize pt-2">{user.account_status}</td>
+                            <td className="text-center">
+                                {user.account_status === 'pending' ?
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary shadow-none mt-1 mt-sm-0"
+                                        onClick={() => updatestatus({ id: user.id, status: "confirmed" })}
+                                    >Confirm</button>
+                                    : user.account_status === 'confirmed' ?
+                                        <div>
+                                            <button
+                                                type="button"
+                                                className="btn btn-danger shadow-none"
+                                                onClick={() => updatestatus({ id: user.id, status: "blocked" })}
+                                            >Block</button>
+                                            <button type="button" className="btn btn-success shadow-none mt-1 mt-sm-0">Give Coin</button>
+                                        </div>
+                                        : user.account_status === 'blocked' ?
+                                            <button
+                                                type="button"
+                                                className="btn btn-warning shadow-none"
+                                                onClick={() => updatestatus({ id: user.id, status: "confirmed" })}
+                                            >Unblock</button>
+                                            : null
+                                }
+
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+
         </div>
     );
 };
