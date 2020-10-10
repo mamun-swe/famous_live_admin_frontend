@@ -41,8 +41,8 @@ const SideBar = () => {
     // Logout
     const logout = async () => {
         try {
-            const response = axios.put(`${api}auth/logout`, header)
-            if (response) {
+            const response = await axios.get(`${api}auth/logout`, header)
+            if (response.status === 200) {
                 localStorage.clear()
                 history.push('/')
             }
