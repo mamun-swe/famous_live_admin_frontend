@@ -62,9 +62,9 @@ const Login = () => {
                                 />
                             </div>
 
-                            <div className="text-right mb-3">
+                            {/* <div className="text-right mb-3">
                                 <Link to="/reset">Forgot password ?</Link>
-                            </div>
+                            </div> */}
 
                             <button type="submit"
                                 className="btn float-right shadow-none text-white px-4 mt-3">
