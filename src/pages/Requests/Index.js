@@ -6,6 +6,10 @@ import Loading from '../../components/Loading';
 
 import noDataImage from '../../assets/static/no_data.png';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure({ autoClose: 2000 })
 const Index = () => {
     const [isLoading, setLoading] = useState(false)
     const [isEmpty, setEmpty] = useState(false)
@@ -17,11 +21,19 @@ const Index = () => {
         fetchRequests()
     }, [])
 
+    // Header 
+    const header = {
+        headers:
+        {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
+    }
+
     // fetch users
     const fetchRequests = async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`${api}admin//users/name/update/requests`)
+            const response = await axios.get(`${api}admin//users/name/update/requests`, header)
 
             if (response.data.requests.length > 0) {
                 setLoading(false)
@@ -31,7 +43,10 @@ const Index = () => {
             setLoading(false)
             return setEmpty(true)
         } catch (error) {
-            if (error) console.log(error.response)
+            if (error) {
+                setLoading(false)
+                toast.warn(error.response.data.message)
+            }
         }
     }
 
@@ -44,7 +59,7 @@ const Index = () => {
 
         try {
             setLoading(true)
-            const response = await axios.put(`${api}admin/user/${data.id}/update-name`, newData)
+            const response = await axios.put(`${api}admin/user/${data.id}/update-name`, newData, header)
             if (response.data.message === 'success') {
                 fetchRequests()
                 setLoading(false)

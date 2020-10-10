@@ -2,28 +2,49 @@ import React, { useState } from 'react';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Icon } from 'react-icons-kit';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { ic_menu, ic_announcement } from 'react-icons-kit/md';
 import { users, user, lock } from 'react-icons-kit/icomoon';
 import { dashboard } from 'react-icons-kit/fa/dashboard';
+import axios from 'axios';
+import api from '../utils/api';
 
 import sidebarBg from '../assets/static/bg.jpg';
 import userImg from '../assets/static/user.jpg';
 
 
 const SideBar = () => {
-    const [toggled, setToggled] = useState(false);
-    const [image] = useState(true);
+    const history = useHistory()
+    const [toggled, setToggled] = useState(false)
+    const [image] = useState(true)
 
     const handleToggleSidebar = (value) => {
         setToggled(value);
-    };
+    }
 
+    // Header 
+    const header = {
+        headers:
+        {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
+    }
 
     // Logout
-    const logout = () => {
-        window.location.href = '/'
+    const logout = async () => {
+        try {
+            const response = axios.put(`${api}logout`, header)
+            if (response) {
+                localStorage.clear()
+                history.push('/')
+            }
+        } catch (error) {
+            if (error) {
+                localStorage.clear()
+                history.push('/')
+            }
+        }
     }
 
     return (

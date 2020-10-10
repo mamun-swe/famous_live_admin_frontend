@@ -5,7 +5,10 @@ import UserList from '../../components/UserList';
 import Pagination from '../../components/Pagination';
 import Loading from '../../components/Loading';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure({ autoClose: 2000 })
 const Index = () => {
     const [isLoading, setLoading] = useState(false)
     const [users, setUsers] = useState([])
@@ -36,17 +39,27 @@ const Index = () => {
         return setFilteredUsers(filtereData)
     }
 
+    // Header 
+    const header = {
+        headers:
+        {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
+    }
 
     // fetch users
     const fetchUsers = async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`${api}admin/users`)
+            const response = await axios.get(`${api}admin/users`, header)
             setUsers(response.data.users)
             setFilteredUsers(response.data.users)
             setLoading(false)
         } catch (error) {
-            if (error) console.log(error.message)
+            if (error) {
+                setLoading(false)
+                toast.warn(error.response.data.message)
+            }
         }
     }
 
@@ -58,7 +71,7 @@ const Index = () => {
 
         try {
             setLoading(true)
-            const response = await axios.put(`${api}admin/user/${data.id}/update-status`, newData)
+            const response = await axios.put(`${api}admin/user/${data.id}/update-status`, newData, header)
             if (response.data.message === 'success') {
                 fetchUsers()
                 setLoading(false)
