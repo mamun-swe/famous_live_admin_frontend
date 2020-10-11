@@ -39,7 +39,7 @@ const UserList = ({ users }) => {
 
         try {
             setLoading(true)
-            const response = await axios.put(`${api}admin/user/${modalData.id}/give-coin`, newData, header)
+            const response = await axios.put(`${api}admin/user/${modalData.id}/give-daimond`, newData, header)
             if (response.data.status === true) {
                 handleClose()
                 toast.success(response.data.message)
