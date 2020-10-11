@@ -57,18 +57,6 @@ const Dashboard = () => {
                                 </div>
                             </Link>
                         </div>
-
-                        <div className="col-6 col-md-4">
-                            <Link to='/dashboard/requests'>
-                                <div className="card border-0 shadow p-2">
-                                    <div className="flex-center flex-column text-center">
-                                        <h4 className="color-unique">{data.updateRequests}</h4>
-                                        <p className="text-dark">name update requests</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
-
                     </div>
                 </div>
             }

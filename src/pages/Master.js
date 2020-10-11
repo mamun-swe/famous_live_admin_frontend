@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import Dashboard from './Dashboard/Dashboard';
 import UserIndex from './Users/Index';
-import UpdateRequests from './Requests/Index';
 
 
 const Master = () => {
@@ -20,7 +19,6 @@ const Master = () => {
                         <Switch>
                             <Route exact path="/dashboard/" component={Dashboard} />
                             <Route exact path="/dashboard/users" component={UserIndex} />
-                            <Route exact path="/dashboard/requests" component={UpdateRequests} />
                         </Switch>
                     </main>
                 </div>

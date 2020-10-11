@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import noImage from '../assets/static/noimage.png';
 
 toast.configure({ autoClose: 2000 })
-const UserList = ({ users, updatestatus }) => {
+const UserList = ({ users }) => {
     const { register, handleSubmit, errors } = useForm()
     const [show, setShow] = useState(false)
     const [modalData, setModalData] = useState({})
@@ -60,7 +60,6 @@ const UserList = ({ users, updatestatus }) => {
                         <td>Image</td>
                         <td>Name</td>
                         <td>Phone</td>
-                        <td>Status</td>
                         <td className="text-center">Action</td>
                     </tr>
                 </thead>
@@ -79,36 +78,12 @@ const UserList = ({ users, updatestatus }) => {
                             </td>
                             <td className="pt-2">{user.name}</td>
                             <td className="pt-2">{user.phone}</td>
-                            <td className="text-capitalize pt-2">{user.account_status}</td>
                             <td className="text-center">
-                                {user.account_status === 'pending' ?
-                                    <button
-                                        type="button"
-                                        className="btn btn-primary shadow-none mt-1 mt-sm-0"
-                                        onClick={() => updatestatus({ id: user.id, status: "confirmed" })}
-                                    >Confirm</button>
-                                    : user.account_status === 'confirmed' ?
-                                        <div>
-                                            <button
-                                                type="button"
-                                                className="btn btn-danger shadow-none"
-                                                onClick={() => updatestatus({ id: user.id, status: "blocked" })}
-                                            >Block</button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-success shadow-none mt-1 mt-sm-0"
-                                                onClick={() => handleShow(user)}
-                                            >Give Coin</button>
-                                        </div>
-                                        : user.account_status === 'blocked' ?
-                                            <button
-                                                type="button"
-                                                className="btn btn-warning shadow-none"
-                                                onClick={() => updatestatus({ id: user.id, status: "confirmed" })}
-                                            >Unblock</button>
-                                            : null
-                                }
-
+                                <button
+                                    type="button"
+                                    className="btn btn-success shadow-none mt-1 mt-sm-0"
+                                    onClick={() => handleShow(user)}
+                                >Give Daimond</button>
                             </td>
                         </tr>
                     )}

@@ -63,26 +63,6 @@ const Index = () => {
         }
     }
 
-    // Update Account Status
-    const changeStatus = async (data) => {
-        let newData = {
-            account_status: data.status
-        }
-
-        try {
-            setLoading(true)
-            const response = await axios.put(`${api}admin/user/${data.id}/update-status`, newData, header)
-            if (response.data.message === 'success') {
-                fetchUsers()
-                setLoading(false)
-            }
-        } catch (error) {
-            if (error) {
-                console.log(error.response)
-            }
-        }
-    }
-
 
     // Get Current Users
     const indexOfLastUser = currentPage * usersPerPage;
@@ -118,7 +98,7 @@ const Index = () => {
                         <div className="col-12">
                             <div className="card border-0 py-3 mb-3">
 
-                                <UserList users={currentUsers} updatestatus={changeStatus} />
+                                <UserList users={currentUsers} />
 
                                 <div className="px-2 px-lg-3 pt-2 pt-lg-3">
                                     <Pagination usersPerPage={usersPerPage} totalUsers={filteredUsers.length} paginate={paginate} />

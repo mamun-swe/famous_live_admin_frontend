@@ -4,7 +4,7 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import { Icon } from 'react-icons-kit';
 import { Link, useHistory } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { ic_menu, ic_announcement } from 'react-icons-kit/md';
+import { ic_menu } from 'react-icons-kit/md';
 import { users, lock } from 'react-icons-kit/icomoon';
 import { dashboard } from 'react-icons-kit/fa/dashboard';
 import axios from 'axios';
@@ -70,10 +70,6 @@ const SideBar = () => {
                     <MenuItem active={true} icon={<Icon icon={users} />}>
                         Users
                         <Link to="/dashboard/users" />
-                    </MenuItem>
-                    <MenuItem active={true} icon={<Icon icon={ic_announcement} />}>
-                        Name Update Requests
-                        <Link to="/dashboard/requests" />
                     </MenuItem>
                 </Menu>
             </ProSidebar>
