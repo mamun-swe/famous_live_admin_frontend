@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import noImage from '../assets/static/noimage.png';
 
 toast.configure({ autoClose: 2000 })
-const UserList = ({ users }) => {
+const UserList = ({ users, block, unblock }) => {
     const { register, handleSubmit, errors } = useForm()
     const [show, setShow] = useState(false)
     const [modalData, setModalData] = useState({})
@@ -32,6 +32,7 @@ const UserList = ({ users }) => {
         }
     }
 
+    // Send daimond
     const onSubmit = async (data) => {
         const newData = {
             coin_amount: parseInt(data.coin_amount)
@@ -51,6 +52,16 @@ const UserList = ({ users }) => {
                 console.log(error.response)
             }
         }
+    }
+
+    // Block
+    const submitBlock = data => {
+        block({ status: 'blocked', blockId: data })
+    }
+
+    // Unblock
+    const submitUnlock = data => {
+        unblock({ status: 'confirmed', blockId: data })
     }
 
     return (
@@ -86,6 +97,20 @@ const UserList = ({ users }) => {
                                     className="btn btn-success shadow-none mt-1 mt-sm-0"
                                     onClick={() => handleShow(user)}
                                 >Give Daimond</button>
+
+                                {user.account_status === 'confirmed' ?
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger shadow-none mt-1 mt-sm-0"
+                                        onClick={() => submitBlock(user.id)}
+                                    >Block</button>
+                                    : user.account_status === 'blocked' ?
+                                        <button
+                                            type="button"
+                                            className="btn btn-info shadow-none mt-1 mt-sm-0"
+                                            onClick={() => submitUnlock(user.id)}
+                                        >Unblock</button>
+                                        : null}
                             </td>
                         </tr>
                     )}
